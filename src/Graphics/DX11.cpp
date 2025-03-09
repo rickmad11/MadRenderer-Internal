@@ -1098,7 +1098,7 @@ namespace MadRenderer
 			return;
 		}
 	
-		if(soundID < sound_effects.size())
+		if(static_cast<size_t>(soundID) < sound_effects.size())
 			sound_effects[soundID].pSoundEffect->Play(volume, pitch, pan);
 	}
 }
