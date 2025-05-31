@@ -778,6 +778,43 @@ namespace MadRenderer
 	
 		pRenderer->AddVertices(this, _vertices, D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 	}
+
+	void RenderList::DrawArrow(Vector2 target2D, float radius, Color color) noexcept
+	{
+		const float windowCenterX = static_cast<float>(pRenderer->windowWidth) * 0.5f;
+		const float windowCenterY = static_cast<float>(pRenderer->windowHeight) * 0.5f;
+
+		const Vector2 screenCenter = { windowCenterX, windowCenterY };
+
+		const Vector2 delta = target2D - screenCenter;
+		const float angle = atan2f(delta.y, delta.x);
+
+		Vector2 tip =
+		{
+			windowCenterX + radius * cosf(angle),
+			windowCenterY + radius * sinf(angle)
+		};
+
+		constexpr float size = 12.0f;
+
+		constexpr float angleOffset = std::numbers::pi_v<float> / 6;
+
+		Vector2 left =
+		{
+			tip.x - size * cosf(angle - angleOffset),
+			tip.y - size * sinf(angle - angleOffset)
+		};
+
+		Vector2 right =
+		{
+			tip.x - size * cosf(angle + angleOffset),
+			tip.y - size * sinf(angle + angleOffset)
+		};
+
+		DrawLine(left, tip, color);
+		DrawLine(right, tip, color);
+		DrawLine(left, right, color);
+	}
 	
 	void RenderList::Draw2DText() const noexcept
 	{

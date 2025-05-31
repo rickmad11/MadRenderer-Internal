@@ -40,6 +40,7 @@ namespace MadRenderer
 		void DrawFilledRectGradient(Vector4 const& rect, Color color, float gradientIntensity = 1.f) noexcept;
 		void DrawOutlinedRect(Vector4 const& rect, float strokeWidth, Color const& OutlineColor) noexcept;
 		void DrawCircle(Vector2 pos, float radius, Color const& color) noexcept;
+		void DrawArrow(Vector2 target2D, float radius, Color color) noexcept;
 
 		template <int smoothness>
 		void DrawSmoothCircle(Vector2 pos, float radius, Color const& color) noexcept;
